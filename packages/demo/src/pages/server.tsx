@@ -11,7 +11,7 @@ interface OtherProps {
 }
 
 const Server: NextPage<OtherProps> = ({appProp, getServerSideProp}) => {
-    const {app, page} = useSelector<State, State>(state => state);
+    const {app, page} = useSelector<State, State>((state) => state);
     return (
         <div className="server">
             <p>Page has access to store even though it does not dispatch anything itself</p>
@@ -27,7 +27,7 @@ const Server: NextPage<OtherProps> = ({appProp, getServerSideProp}) => {
     );
 };
 
-export const getServerSideProps = wrapper.getServerSideProps(store => async () => {
+export const getServerSideProps = wrapper.getServerSideProps((store) => async () => {
     store.dispatch({type: 'PAGE', payload: 'server'});
     return {props: {getServerSideProp: 'bar'}};
 });

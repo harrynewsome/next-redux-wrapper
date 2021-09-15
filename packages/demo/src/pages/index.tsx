@@ -12,7 +12,10 @@ export interface PageProps extends State {
 class Index extends React.Component<PageProps> {
     // note that since _app is wrapped no need to wrap page
     public static async getInitialProps({store, pathname, query, req}: NextPageContext) {
-        console.log('2. Page.getInitialProps uses the store to dispatch things', {pathname, query});
+        console.log('2. Page.getInitialProps uses the store to dispatch things', {
+            pathname,
+            query,
+        });
 
         if (req) {
             // All async actions must be await'ed
@@ -57,4 +60,4 @@ class Index extends React.Component<PageProps> {
     }
 }
 
-export default connect(state => state)(Index);
+export default connect((state) => state)(Index);

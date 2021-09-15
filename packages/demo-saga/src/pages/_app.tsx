@@ -4,7 +4,7 @@ import {END} from 'redux-saga';
 import {SagaStore, wrapper} from '../components/store';
 
 class MyApp extends React.Component<AppProps> {
-    public static getInitialProps = wrapper.getInitialAppProps(store => async context => {
+    public static getInitialProps = wrapper.getInitialAppProps((store) => async (context) => {
         // 1. Wait for all page actions to dispatch
         const pageProps = {
             // https://nextjs.org/docs/advanced-features/custom-app#caveats

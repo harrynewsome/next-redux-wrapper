@@ -5,7 +5,7 @@ import {NextPage} from 'next';
 import {State} from '../components/reducer';
 
 const Error: NextPage = () => {
-    const app = useSelector<State, State['app']>(state => state.app);
+    const app = useSelector<State, State['app']>((state) => state.app);
     return (
         <>
             <p>

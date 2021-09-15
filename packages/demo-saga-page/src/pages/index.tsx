@@ -12,7 +12,7 @@ export interface ConnectedPageProps {
 
 // Page itself is not connected to Redux Store, it has to render Provider to allow child components to connect to Redux Store
 const Page: NextPage<ConnectedPageProps> = ({custom}: ConnectedPageProps) => {
-    const {page} = useSelector<State, State>(state => state);
+    const {page} = useSelector<State, State>((state) => state);
     return (
         <div className="index">
             <pre>{JSON.stringify({page, custom}, null, 2)}</pre>
@@ -20,7 +20,7 @@ const Page: NextPage<ConnectedPageProps> = ({custom}: ConnectedPageProps) => {
     );
 };
 
-export const getServerSideProps = wrapper.getServerSideProps(store => async () => {
+export const getServerSideProps = wrapper.getServerSideProps((store) => async () => {
     store.dispatch({type: SAGA_ACTION});
     store.dispatch(END);
     await (store as SagaStore).sagaTask.toPromise();

@@ -11,7 +11,7 @@ interface OtherProps {
 }
 
 const Static: NextPage<OtherProps> = ({appProp, getStaticProp}) => {
-    const {app, page} = useSelector<State, State>(state => state);
+    const {app, page} = useSelector<State, State>((state) => state);
     return (
         <div className="static">
             <p>Page has access to store even though it does not dispatch anything itself</p>
@@ -27,7 +27,7 @@ const Static: NextPage<OtherProps> = ({appProp, getStaticProp}) => {
     );
 };
 
-export const getStaticProps = wrapper.getStaticProps(store => async () => {
+export const getStaticProps = wrapper.getStaticProps((store) => async () => {
     store.dispatch({type: 'PAGE', payload: 'static'});
     return {props: {getStaticProp: 'bar'}};
 });

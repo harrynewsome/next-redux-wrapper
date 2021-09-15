@@ -3,7 +3,7 @@ import {useSelector, useStore} from 'react-redux';
 import Link from 'next/link';
 import {fetchSubject, selectSubject, wrapper} from '../../store';
 
-const Page = props => {
+const Page = (props) => {
     console.log('State on render', useStore().getState(), props);
     const content = useSelector(selectSubject(props.id));
 
@@ -27,7 +27,7 @@ const Page = props => {
     );
 };
 
-export const getServerSideProps = wrapper.getServerSideProps(store => async ({params}) => {
+export const getServerSideProps = wrapper.getServerSideProps((store) => async ({params}) => {
     const {id} = params;
 
     await store.dispatch(fetchSubject(id));

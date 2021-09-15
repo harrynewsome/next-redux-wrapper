@@ -11,7 +11,7 @@ export interface ConnectedPageProps {
 
 // Page itself is not connected to Redux Store, it has to render Provider to allow child components to connect to Redux Store
 const Page: NextPage<ConnectedPageProps> = ({custom}) => {
-    const {page} = useSelector<State, State>(state => state);
+    const {page} = useSelector<State, State>((state) => state);
     return (
         <div className="index">
             <pre>{JSON.stringify({page, custom}, null, 2)}</pre>
@@ -26,10 +26,13 @@ const Page: NextPage<ConnectedPageProps> = ({custom}) => {
     );
 };
 
-export const getServerSideProps = wrapper.getServerSideProps(store => async ({req}) => {
+export const getServerSideProps = wrapper.getServerSideProps((store) => async ({req}) => {
     console.log('2. Page.getServerSideProps uses the store to dispatch things');
-    store.dispatch({type: 'PAGE', payload: 'was set in index page ' + req.url});
-    await new Promise(res => setTimeout(res, 100));
+    store.dispatch({
+        type: 'PAGE',
+        payload: 'was set in index page ' + req.url,
+    });
+    await new Promise((res) => setTimeout(res, 100));
     return {props: {custom: 'custom'}};
 });
 

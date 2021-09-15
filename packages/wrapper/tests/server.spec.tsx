@@ -9,7 +9,7 @@ describe('function API', () => {
 
     test('getStaticProps', async () => {
         expect(
-            await createWrapper(makeStore).getStaticProps(store => async context => {
+            await createWrapper(makeStore).getStaticProps((store) => async (context) => {
                 store.dispatch({type: 'FOO', payload: 'val'});
                 return {props: pageProps, preview: true};
             })(ctx),
@@ -21,7 +21,7 @@ describe('function API', () => {
 
     test('getServerSideProps', async () => {
         expect(
-            await createWrapper(makeStore).getServerSideProps(store => async context => {
+            await createWrapper(makeStore).getServerSideProps((store) => async (context) => {
                 store.dispatch({type: 'FOO', payload: 'val'});
                 return {props: pageProps, fromSSP: true};
             })(ctx),
@@ -35,7 +35,7 @@ describe('function API', () => {
         test('simple usage', async () => {
             const wrapper = createWrapper(makeStore);
             const App = () => null;
-            App.getInitialProps = wrapper.getInitialAppProps(store => async (context: any) => {
+            App.getInitialProps = wrapper.getInitialAppProps((store) => async (context: any) => {
                 store.dispatch({type: 'FOO', payload: 'val'});
                 return {pageProps};
             });
@@ -58,7 +58,7 @@ describe('function API', () => {
             // execute App level
 
             const App = () => null;
-            App.getInitialProps = wrapper.getInitialAppProps(store => async (ctx: any) => {
+            App.getInitialProps = wrapper.getInitialAppProps((store) => async (_ctx: any) => {
                 store.dispatch({type: 'FOO', payload: 'app'});
                 return {pageProps: {fromApp: true}};
             });
@@ -72,7 +72,7 @@ describe('function API', () => {
 
             // execute Page level
 
-            const serverSideProps = await wrapper.getServerSideProps(store => async () => {
+            const serverSideProps = await wrapper.getServerSideProps((store) => async () => {
                 expect(store.getState()).toEqual({reduxStatus: 'app'});
                 store.dispatch({type: 'FOO', payload: 'ssp'});
                 return {props: {fromSSP: true}};
@@ -108,7 +108,7 @@ describe('function API', () => {
         test('simple context', async () => {
             const wrapper = createWrapper(makeStore);
             const Page = () => null;
-            Page.getInitialProps = wrapper.getInitialPageProps(store => async (context: any) => {
+            Page.getInitialProps = wrapper.getInitialPageProps((store) => async (context: any) => {
                 store.dispatch({type: 'FOO', payload: 'val'});
                 return {pageProps};
             });
@@ -157,7 +157,7 @@ describe('custom serialization', () => {
         });
 
         const Page = () => null;
-        Page.getInitialProps = wrapper.getInitialPageProps(store => () => null);
+        Page.getInitialProps = wrapper.getInitialPageProps((store) => () => null);
 
         const props = await wrapper.withRedux(Page)?.getInitialProps({});
 
